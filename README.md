@@ -1,3 +1,29 @@
+# Generate the inputs required for creating shapes
+
+## Generate folder `goat`
+
+```
+git clone https://github.com/ProjectZKM/reth-processor.git
+cd reth-processor
+
+ZKM_DUMP=1 RUST_LOG=info cargo run -r --bin continuous -- --block-number <START_NUMBER> --rpc-url <RPC_URL> --chain-id <CHAIN_ID>
+```
+
+## Generate folder `reth`
+
+```
+git clone https://github.com/ProjectZKM/reth-processor.git -b stateless
+cd reth-processor
+
+export ETH_PROOFS_ENDPOINT=
+export ETH_PROOFS_API_TOKEN=
+export DEBUG_HTTP_RPC_URL=
+export HTTP_RPC_URL=
+export WS_RPC_URL=
+
+ZKM_DUMP=1 RUST_LOG=info cargo run -r --bin eth-proofs --features test -- --eth-proofs-cluster-id <CLUSTER_ID> --block-interval 1 --execute-only
+```
+
 # Generate Shapes
 
 ## Full Generation
